@@ -57,7 +57,7 @@ window.addEventListener('scroll', () => {
 // Form Submission Handler
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         // Get form values
@@ -66,15 +66,107 @@ if (contactForm) {
         const subject = document.getElementById('subject')?.value || 'No Subject';
         const message = document.getElementById('message').value;
         
-        // Here you would typically send the form data to a server
-        // For now, we'll just show an alert
-        alert(`Thanks for reaching out, ${name}! 📧\n\nI'll get back to you at ${email} as soon as possible!\n\nYour message about "${subject}" has been received.`);
+        // Show loading state
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
         
-        // Reset form
-        contactForm.reset();
+        // Option 1: Using EmailJS (Recommended - Free tier available)
+        // First, sign up at https://www.emailjs.com and get your service ID, template ID, and public key
         
-        // Optional: Show a success message
-        showSuccessMessage();
+        /* 
+        // EmailJS Implementation - Uncomment this section after setting up EmailJS
+        try {
+            // Initialize EmailJS with your public key
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+            
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message,
+                to_email: 'jonathanshin310@gmail.com'
+            };
+            
+            await emailjs.send(
+                'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
+                'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+                templateParams
+            );
+            
+            showSuccessMessage();
+            contactForm.reset();
+        } catch (error) {
+            console.error('Failed to send email:', error);
+            alert('Sorry, there was an error sending your message. Please try again.');
+        }
+        */
+        
+        // Option 2: Using Formspree (Also free tier available)
+        // Sign up at https://formspree.io and get your form endpoint
+        
+        /*
+        // Formspree Implementation - Uncomment this section after setting up Formspree
+        try {
+            const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', { // Replace with your Formspree endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    subject: subject,
+                    message: message
+                })
+            });
+            
+            if (response.ok) {
+                showSuccessMessage();
+                contactForm.reset();
+            } else {
+                throw new Error('Form submission failed');
+            }
+        } catch (error) {
+            console.error('Failed to send email:', error);
+            alert('Sorry, there was an error sending your message. Please try again.');
+        }
+        */
+        
+        // Option 3: Using Web3Forms (No signup required, just need API key)
+        // Get your API key from https://web3forms.com
+        
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    access_key: 'YOUR_ACCESS_KEY', // Replace with your Web3Forms access key
+                    from_name: name,
+                    email: email,
+                    subject: `Portfolio Contact: ${subject}`,
+                    message: message,
+                    to_email: 'jonathanshin310@gmail.com'
+                })
+            });
+            
+            if (response.ok) {
+                showSuccessMessage();
+                contactForm.reset();
+            } else {
+                throw new Error('Form submission failed');
+            }
+        } catch (error) {
+            console.error('Failed to send email:', error);
+            alert('Sorry, there was an error sending your message. Please try again.');
+        }
+        
+        // Restore button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
     });
 }
 
