@@ -72,14 +72,10 @@ if (contactForm) {
         submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;
         
-        // Option 1: Using EmailJS (Recommended - Free tier available)
-        // First, sign up at https://www.emailjs.com and get your service ID, template ID, and public key
-        
-        /* 
-        // EmailJS Implementation - Uncomment this section after setting up EmailJS
+        // EmailJS Implementation
         try {
             // Initialize EmailJS with your public key
-            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+            emailjs.init("zSyPf3-yjmIDPSg_8"); // Replace with your EmailJS public key
             
             const templateParams = {
                 from_name: name,
@@ -90,8 +86,8 @@ if (contactForm) {
             };
             
             await emailjs.send(
-                'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-                'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+                'service_mdo0jec',
+                'template_6j6aj2o',
                 templateParams
             );
             
@@ -101,70 +97,7 @@ if (contactForm) {
             console.error('Failed to send email:', error);
             alert('Sorry, there was an error sending your message. Please try again.');
         }
-        */
         
-        // Option 2: Using Formspree (Also free tier available)
-        // Sign up at https://formspree.io and get your form endpoint
-        
-        /*
-        // Formspree Implementation - Uncomment this section after setting up Formspree
-        try {
-            const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', { // Replace with your Formspree endpoint
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    subject: subject,
-                    message: message
-                })
-            });
-            
-            if (response.ok) {
-                showSuccessMessage();
-                contactForm.reset();
-            } else {
-                throw new Error('Form submission failed');
-            }
-        } catch (error) {
-            console.error('Failed to send email:', error);
-            alert('Sorry, there was an error sending your message. Please try again.');
-        }
-        */
-        
-        // Option 3: Using Web3Forms (No signup required, just need API key)
-        // Get your API key from https://web3forms.com
-        
-        try {
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    access_key: 'YOUR_ACCESS_KEY', // Replace with your Web3Forms access key
-                    from_name: name,
-                    email: email,
-                    subject: `Portfolio Contact: ${subject}`,
-                    message: message,
-                    to_email: 'jonathanshin310@gmail.com'
-                })
-            });
-            
-            if (response.ok) {
-                showSuccessMessage();
-                contactForm.reset();
-            } else {
-                throw new Error('Form submission failed');
-            }
-        } catch (error) {
-            console.error('Failed to send email:', error);
-            alert('Sorry, there was an error sending your message. Please try again.');
-        }
-        
-        // Restore button state
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
     });
