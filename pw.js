@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // EmailJS Implementation
             try {
                 // Initialize EmailJS with your public key
-                emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+                emailjs.init("zSyPf3-yjmIDPSg_8"); // Replace with your EmailJS public key
                 
                 const templateParams = {
                     from_name: name,
@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
                 
                 await emailjs.send(
-                    'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-                    'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+                    'service_mdo0jec',
+                    'template_6j6aj2o',
                     templateParams
                 );
                 
