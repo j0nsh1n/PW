@@ -134,16 +134,21 @@ let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
+
     if (navbar) {
+        const isDarkMode = document.body.classList.contains('dark-mode');
         if (currentScroll > 50) {
-            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            navbar.style.background = isDarkMode
+                ? 'rgba(17, 24, 39, 0.98)'
+                : 'rgba(255, 255, 255, 0.98)';
             navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
         } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            navbar.style.background = isDarkMode
+                ? 'rgba(17, 24, 39, 0.95)'
+                : 'rgba(255, 255, 255, 0.95)';
             navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
         }
-        
+
         // Hide/Show navbar on scroll
         if (currentScroll > lastScroll && currentScroll > 300) {
             navbar.style.transform = 'translateY(-100%)';
@@ -151,7 +156,7 @@ window.addEventListener('scroll', () => {
             navbar.style.transform = 'translateY(0)';
         }
     }
-    
+
     lastScroll = currentScroll;
 });
 
