@@ -252,6 +252,7 @@ section {
 
 .fact-emoji {
     font-size: 2rem;
+    transition: transform 0.3s ease;
 }
 
 .fact-text {
@@ -405,6 +406,32 @@ section {
 
 .social-icon {
     font-size: 1.25rem;
+    width: 1.25rem;
+    text-align: center;
+}
+
+/* Optional: Add brand colors to social icons on hover */
+.social-link:hover .fa-envelope {
+    color: #EA4335;
+}
+
+.social-link:hover .fa-linkedin {
+    color: #0077B5;
+}
+
+.social-link:hover .fa-github {
+    color: #333;
+}
+
+.social-link:hover .fa-instagram {
+    background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.social-link:hover .fa-discord {
+    color: #5865F2;
 }
 
 /* Page Hero (for other pages) */
@@ -814,12 +841,248 @@ section {
     font-style: italic;
 }
 
+/* Discord Popup Styles */
+.discord-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+}
+
+.discord-popup {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    animation: slideIn 0.3s ease;
+}
+
+.discord-popup-icon {
+    font-size: 3rem;
+    color: #5865F2;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.discord-popup h3 {
+    margin-bottom: 1rem;
+    color: #1F2937;
+}
+
+.discord-username {
+    font-size: 1.25rem;
+    color: #6B7280;
+    margin-bottom: 1.5rem;
+    font-family: monospace;
+    background: #F3F4F6;
+    padding: 0.75rem;
+    border-radius: 10px;
+}
+
+.discord-copy-btn {
+    background: #5865F2;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    transition: all 0.3s;
+}
+
+.discord-copy-btn:hover {
+    background: #4752C4;
+    transform: translateY(-2px);
+}
+
+.discord-copy-btn.copied {
+    background: #10B981;
+}
+
+.discord-close-btn {
+    background: #E5E7EB;
+    color: #6B7280;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.discord-close-btn:hover {
+    background: #D1D5DB;
+}
+
+/* Success Message Styles */
+.success-message {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: #10B981;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: slideInRight 0.3s ease-out;
+    z-index: 9999;
+}
+
 /* Footer */
 .footer {
     background: var(--text-dark);
     color: var(--white);
     text-align: center;
     padding: 2rem 0;
+}
+
+/* Dark Mode Variables and Styles */
+body.dark-mode {
+    --primary-color: #8B5CF6;
+    --secondary-color: #EC4899;
+    --accent-color: #22D3EE;
+    --text-dark: #F3F4F6;
+    --text-light: #D1D5DB;
+    --bg-light: #1F2937;
+    --bg-gradient: linear-gradient(135deg, #4C1D95 0%, #831843 100%);
+    --white: #111827;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    
+    background-color: #111827;
+    color: var(--text-dark);
+}
+
+/* Dark Mode Specific Styles */
+body.dark-mode .navbar {
+    background: rgba(17, 24, 39, 0.95);
+}
+
+body.dark-mode .bar {
+    background: var(--text-dark);
+}
+
+body.dark-mode .about-card,
+body.dark-mode .link-card,
+body.dark-mode .activity-card,
+body.dark-mode .project-showcase-card,
+body.dark-mode .award-card,
+body.dark-mode .mini-project,
+body.dark-mode .course-item,
+body.dark-mode .gpa-card,
+body.dark-mode .test-card {
+    background: #1F2937;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .fact-item {
+    background: #374151;
+}
+
+body.dark-mode .fact-item:hover {
+    background: linear-gradient(135deg, #4C1D95, #831843);
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea {
+    background: #374151;
+    border-color: #4B5563;
+    color: var(--text-dark);
+}
+
+body.dark-mode .form-group input:focus,
+body.dark-mode .form-group textarea:focus {
+    background: #1F2937;
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .social-link {
+    background: #374151;
+}
+
+body.dark-mode .social-link:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+body.dark-mode .footer {
+    background: #000000;
+}
+
+body.dark-mode .tag,
+body.dark-mode .tech-tag {
+    background: #374151;
+    color: var(--primary-color);
+}
+
+body.dark-mode .fun-facts,
+body.dark-mode .contact,
+body.dark-mode .awards-section,
+body.dark-mode .other-projects {
+    background: #111827;
+}
+
+body.dark-mode .test-scores {
+    background: #1F2937;
+}
+
+body.dark-mode .ap-score-item {
+    border-bottom-color: #374151;
+}
+
+body.dark-mode .discord-popup {
+    background: #1F2937;
+    color: var(--text-dark);
+}
+
+body.dark-mode .discord-popup h3 {
+    color: var(--text-dark);
+}
+
+body.dark-mode .discord-username {
+    background: #374151;
+    color: var(--text-dark);
+}
+
+body.dark-mode .discord-close-btn {
+    background: #374151;
+    color: var(--text-dark);
+}
+
+body.dark-mode .discord-close-btn:hover {
+    background: #4B5563;
+}
+
+/* Dark Mode Toggle Button */
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    color: var(--text-dark);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: var(--transition);
+}
+
+.dark-mode-toggle:hover {
+    color: var(--primary-color);
+}
+
+body.dark-mode .dark-mode-toggle {
+    color: #F59E0B;
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+    color: #FBBF24;
 }
 
 /* Animations */
@@ -831,6 +1094,72 @@ section {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes confettiFall {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@keyframes rainbow {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
     }
 }
 
@@ -849,9 +1178,17 @@ section {
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         padding: 2rem 0;
     }
+    
+    body.dark-mode .nav-menu {
+        background: rgba(17, 24, 39, 0.95);
+    }
 
     .nav-menu.active {
         left: 0;
+    }
+    
+    .dark-mode-toggle {
+        margin-top: 1rem;
     }
 
     .hamburger {
@@ -888,5 +1225,16 @@ section {
 
     .page-title {
         font-size: 2rem;
+    }
+    
+    .discord-popup {
+        margin: 1rem;
+        max-width: calc(100% - 2rem);
+    }
+    
+    .success-message {
+        right: 10px;
+        left: 10px;
+        text-align: center;
     }
 }
