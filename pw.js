@@ -66,8 +66,99 @@ function showDiscordPopup(username) {
     });
 }
 
+// Dark Mode Toggle Functions
+function initDarkMode() {
+    // Check for saved dark mode preference or default to user's system preference
+    const currentTheme = localStorage.getItem('theme');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+        document.body.classList.add('dark-mode');
+        updateDarkModeToggle(true);
+    }
+    
+    // Add dark mode toggle to navbar
+    const navMenu = document.querySelector('.nav-menu');
+    if (navMenu && !document.querySelector('.dark-mode-toggle')) {
+        const darkModeToggle = document.createElement('li');
+        darkModeToggle.innerHTML = `
+            <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon dark-mode-icon"></i>
+            </button>
+        `;
+        navMenu.appendChild(darkModeToggle);
+        
+        // Add click event
+        darkModeToggle.querySelector('.dark-mode-toggle').addEventListener('click', toggleDarkMode);
+    }
+}
+
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    
+    // Save preference
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    
+    // Update icon
+    updateDarkModeToggle(isDarkMode);
+    
+    // Smooth transition
+    document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+}
+
+function updateDarkModeToggle(isDarkMode) {
+    const icon = document.querySelector('.dark-mode-icon');
+    if (icon) {
+        icon.className = isDarkMode ? 'fas fa-sun dark-mode-icon' : 'fas fa-moon dark-mode-icon';
+    }
+}
+
+// Show success message after form submission
+function showSuccessMessage() {
+    const successDiv = document.createElement('div');
+    successDiv.className = 'success-message';
+    successDiv.innerHTML = '✅ Message sent successfully!';
+    
+    document.body.appendChild(successDiv);
+    
+    setTimeout(() => {
+        successDiv.style.animation = 'slideOutRight 0.3s ease-out';
+        setTimeout(() => successDiv.remove(), 300);
+    }, 3000);
+}
+
+// Navbar Background on Scroll
+const navbar = document.querySelector('.navbar');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (navbar) {
+        if (currentScroll > 50) {
+            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        } else {
+            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+        }
+        
+        // Hide/Show navbar on scroll
+        if (currentScroll > lastScroll && currentScroll > 300) {
+            navbar.style.transform = 'translateY(-100%)';
+        } else {
+            navbar.style.transform = 'translateY(0)';
+        }
+    }
+    
+    lastScroll = currentScroll;
+});
+
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize dark mode
+    initDarkMode();
 
     // Mobile Navigation Toggle
     const hamburger = document.querySelector('.hamburger');
