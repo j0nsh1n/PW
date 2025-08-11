@@ -66,6 +66,12 @@ function showDiscordPopup(username) {
     });
 }
 
+function toggleBio() {
+    const overlay = document.getElementById('bioOverlay');
+    overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
+    document.querySelector('.profile-pic-container').classList.toggle('active');
+}
+
 // Dark Mode Toggle Functions
 function initDarkMode() {
     // Check for saved dark mode preference or default to user's system preference

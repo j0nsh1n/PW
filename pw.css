@@ -132,7 +132,26 @@ body {
 }
 
 .profile-pic-container {
+    position: relative;
     margin-bottom: 2rem;
+    cursor: pointer;
+}
+.bio-overlay {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 10;
+}
+.profile-pic-container:hover .bio-overlay,
+.profile-pic-container.active .bio-overlay {
+    display: block;
 }
 
 .profile-pic {
